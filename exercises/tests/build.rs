@@ -10,15 +10,8 @@ fn main() {
         .duration_since(std::time::UNIX_EPOCH)
         .unwrap()
         .as_secs(); // What's the use of this timestamp here?
-    let your_command = format!(
-        "Your command here with {}, please checkout exercises/tests/build.rs",
-        timestamp
-    );
-    println!("cargo:{}", your_command);
+    println!("cargo:rustc-env=TEST_FOO={}", timestamp);
 
-    // In tests8, we should enable "pass" feature to make the
-    // testcase return early. Fill in the command to tell
-    // Cargo about that.
-    let your_command = "Your command here, please checkout exercises/tests/build.rs";
-    println!("cargo:{}", your_command);
+    // 对于 tests8，启用 "pass" 特性以使测试用例提前返回
+    println!("cargo:rustc-cfg=feature=\"pass\"");
 }
